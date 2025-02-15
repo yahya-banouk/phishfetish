@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+PyMySQL
+python-dotenv
+boto3
+botocore
+pydantic
+pydantic_core
+sentence-transformers
+transformers

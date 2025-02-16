@@ -6,16 +6,21 @@ from schimas.schemas import CheckContentRequest, PhishingResponse, AIResponse
 from services.services import check_database, ai_phishing_analysis
 
 router = APIRouter()
-
 @router.post("/check-phishing/", response_model=PhishingResponse)
 def check_phishing(request: CheckContentRequest, db=Depends(get_db)):
     content = request.content
-    record = check_database(content, db)  
-    if record:
+    match = check_database(content, db)  # This returns a dictionary {"record": best_match, "similarity": highest_similarity}
+    
+    if match:
+        record = match["record"]  # Extract the Phishing model instance
+        similarity = match["similarity"]  # Extract similarity score
+
         is_phishing = bool(record.is_phishing)
-        message = "⚠️ This is a known phishing attempt!" if is_phishing else "✅ This content is safe."
+        message = f"⚠️ This is a known phishing attempt! (Similarity: {similarity:.2f})" if is_phishing else "✅ This content is safe."
+
         return {"found_in_db": True, "is_phishing": is_phishing, "message": message}
-    # AI Analysis if not found
+
+    # AI Analysis if no match is found
     ai_result = ai_phishing_analysis(content)  
     return {"found_in_db": False, "message": "Content not found in DB", **ai_result}
 

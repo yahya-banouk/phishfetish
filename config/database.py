@@ -18,7 +18,6 @@ print(f"Current ENV: {ENV}")
 
 SQLALCHEMY_DATABASE_URL = (
     f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}/{os.getenv('DB_NAME')}"
-    #f"mysql+mysqlconnector://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}/{os.getenv('DB_NAME')}"
 )
 
 print(f"Database URL: {SQLALCHEMY_DATABASE_URL}")

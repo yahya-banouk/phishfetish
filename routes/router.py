@@ -9,11 +9,11 @@ router = APIRouter()
 @router.post("/check-phishing/", response_model=PhishingResponse)
 def check_phishing(request: CheckContentRequest, db=Depends(get_db)):
     content = request.content
-    match = check_database(content, db)  # This returns a dictionary {"record": best_match, "similarity": highest_similarity}
+    match = check_database(content, db)  
     
     if match:
-        record = match["record"]  # Extract the Phishing model instance
-        similarity = match["similarity"]  # Extract similarity score
+        record = match["record"]  
+        similarity = match["similarity"]  
 
         is_phishing = bool(record.is_phishing)
         message = f"⚠️ This is a known phishing attempt! (Similarity: {similarity:.2f})" if is_phishing else "✅ This content is safe."

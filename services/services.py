@@ -33,7 +33,7 @@ def check_database(content: str, db: Session):
     if best_match and highest_similarity >= threshold:
         return {"record": best_match, "similarity": highest_similarity}
 
-    return None  # No highly similar records found
+    return None  
 
 
 def ai_phishing_analysis(content: str):

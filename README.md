@@ -14,6 +14,17 @@ Phishing Detector API est une application basée sur FastAPI qui permet d'identi
 ### Prérequis
 - Python 3.8+
 - `pip` et `virtualenv` (optionnel mais recommandé)
+- Base de données MySQL configurée avec les informations suivantes :
+  ```
+  ENV=dev
+  
+  # .env pour le développement local
+  DB_HOST=localhost
+  DB_USER=root
+  DB_PASSWORD="Ybmiola99."
+  DB_NAME=phishfetish
+  ```
+  **Assurez-vous d'avoir une base de données nommée `phishfetish` avant de démarrer l'application.**
 
 ### Étapes d'installation
 
@@ -36,7 +47,7 @@ Phishing Detector API est une application basée sur FastAPI qui permet d'identi
 ```
 
 4. **Configurer la base de données**
-L'application utilise SQLAlchemy avec une base de données. Assurez-vous que votre base de données est bien configurée dans `config/database.py`.
+L'application utilise SQLAlchemy avec une base de données MySQL. Assurez-vous que votre base de données est bien configurée et accessible avec les informations fournies ci-dessus.
 
 5. **Lancer l'API**
 ```bash

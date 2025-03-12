@@ -15,71 +15,58 @@ Phishing Detector API est une application basée sur FastAPI qui permet d'identi
 
 ### Prérequis
 
-- Python 3.8+
+- **Installer MySQL** et créer une base de données nommée `phishfetish` :
+  ```bash
+  mysql -u root -p
+  CREATE DATABASE phishfetish;
+  ```
+- **Installer Python 3.8+**
 - `pip` et `virtualenv` (optionnel mais recommandé)
-- Base de données MySQL installée et configurée
+- Configurer la base de données MySQL avec les informations suivantes :
+  ```
+  ENV=dev
 
-### Configuration de la base de données
+  # .env.dev pour le développement local
+  DB_HOST=localhost
+  DB_USER=admin
+  DB_PASSWORD=admin
+  DB_NAME=phishfetish
+  ```
+  **Vous pouvez modifier ces informations dans le fichier ****`.env.dev`**** pour qu'elles correspondent à votre configuration MySQL.**
 
-1. **Installer MySQL** :
-
-```bash
-sudo apt-get update
-sudo apt-get install mysql-server
-```
-
-2. **Se connecter à MySQL et créer la base de données** :
-
-```sql
-CREATE DATABASE phishfetish;
-```
-
-3. **Configurer les identifiants de connexion à la base de données** : Le fichier `.env.dev` doit contenir :
-
-```
-ENV=dev
-DB_HOST=localhost
-DB_USER=admin
-DB_PASSWORD=admin
-DB_NAME=phishfetish
-```
-
-> **Remarque:** Vous pouvez adapter ces identifiants à votre configuration en modifiant les variables dans le fichier `.env.dev`.
-
-### Installation de l'application
+### Étapes d'installation
 
 1. **Cloner le dépôt**
 
 ```bash
-git clone https://github.com/votre-repo/phishing-detector.git
-cd phishing-detector
+    git clone https://github.com/votre-repo/phishing-detector.git
+    cd phishing-detector
 ```
 
 2. **Créer un environnement virtuel (optionnel mais recommandé)**
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate  # Sur MacOS/Linux
-venv\Scripts\activate  # Sur Windows
+    python3 -m venv venv
+    source venv/bin/activate  # Sur MacOS/Linux
+    venv\Scripts\activate  # Sur Windows
 ```
 
 3. **Installer les dépendances**
 
 ```bash
-pip install -r requirements.txt
+    pip install -r requirements.txt
 ```
 
-4. **Lancer l'API**
+4. **Configurer la base de données**
+   L'application utilise SQLAlchemy avec une base de données MySQL. Assurez-vous que votre base de données `phishfetish` est bien créée et accessible avec les informations fournies ci-dessus.
+
+5. **Lancer l'API**
 
 ```bash
-env ENV=dev python3 -m uvicorn app:app --host 0.0.0.0 --reload
+    env ENV=dev python3 -m uvicorn app:app --host 0.0.0.0 --reload
 ```
 
-> **Remarque :** Cette commande est valable pour les terminaux bash. Si vous utilisez un terminal Windows (PowerShell ou Command Prompt), adaptez la syntaxe comme suit :
-
-```powershell
-$env:ENV="dev"; python3 -m uvicorn app:app --host 0.0.0.0 --reload
-```
+⚠️ **Note :** Cette commande peut varier en fonction du terminal utilisé. Assurez-vous que l'environnement virtuel est activé et que les variables d'environnement sont bien configurées.
 
 L'API sera accessible sur `http://0.0.0.0:8000`
 
